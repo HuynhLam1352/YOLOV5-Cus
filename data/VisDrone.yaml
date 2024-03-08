@@ -25,6 +25,7 @@ names:
   8: bus
   9: motor
 
+nc: 10 
 # Download script/URL (optional) ---------------------------------------------------------------------------------------
 download: |
   from utils.general import download, os, Path
