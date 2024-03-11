@@ -3,9 +3,10 @@ nc: 80  # number of classes
 depth_multiple: 0.33  # model depth multiple
 width_multiple: 0.50 # layer channel multiple
 anchors: 
+  - [2.9434,4.0435, 3.8626,8.5592, 6.8534, 5.9391]
   - [10,13, 16,30, 33,23]  # P3/8
   - [30,61, 62,45, 59,119]  # P4/16
-  - [116,90, 156,198, 373,326]  # P5/32
+  - [116,90, 156,198, 373,326] 
 
 backbone:
   # [from, number, module, args]
@@ -38,15 +39,15 @@ head:
 
    [ -1, 1, Conv, [ 128, 1, 1 ] ],
    [ -1, 1, nn.Upsample, [ None, 2, 'nearest' ] ],
-   [ [ -1, 2 ], 1, Concat, [ 1 ] ],  # cat backbone P2
+   [[ -1, 2 ], 1, Concat, [ 1 ]],  # cat backbone P2
    [-1, 1, C3TR, [128, False]], #23
 
-   [ -1, 1, Conv, [ 128, 3, 2 ] ],
-   [ [ -1, 19, 4], 1, Concat, [ 1 ] ],  # cat head P3
+   [ -1, 1, Conv, [ 128, 3, 2]],
+   [[ -1, 19], 1, Concat, [1]],  # cat head P3
    [-1, 1, C3TR, [256, False]],             #26
 
    [-1, 1, Conv, [256, 3, 2]],
-   [[-1, 15, 6], 1, Concat, [1]],  # cat head P4
+   [[-1, 15], 1, Concat, [1]],  # cat head P4
    [-1, 2, C3TR, [512, False]],
    [-1, 1, CBAMBottleneck, [512]],    # 30 (P4/16-medium)
 
