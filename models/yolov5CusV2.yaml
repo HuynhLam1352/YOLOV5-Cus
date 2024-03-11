@@ -57,7 +57,7 @@ head:
    [-1, 1, Conv, [512, 3, 2]],
    [[-1, 10], 1, Concat, [1]],  # cat head P5
    [-1, 3, C3TR, [1024, False]],  #36  (P5/32-large)
-   [-1, 1, CBAMBottleneck, [512]], #37
+   [-1, 1, CBAMBottleneck, [1024]], #37
 
    [[24, 29, 33, 37], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)
   ]
